@@ -1,35 +1,93 @@
 using UnityEngine;
 
-public class CharacterControler : MonoBehaviour
+public class PlayerMovementPlatformer : MonoBehaviour
 {
+    public Rigidbody2D rb; //Ne pas oublier d'activer la gravity scale du rigidbody et d'ajouter un collider
+    public float speed = 1;
+    public float jumpforce = 1;
+    public LayerMask mask; //Quels layer seront affecté par le raycast attention a ne pas ajouter le layer de votre perso sinon le raycast va trouver le perso avant de trouver le sol
 
-    Rigidbody2D rigidbody2D;
-
-    public Transform MyTransform;
-    public float Velocity = 3f;
-    public float PlayerSpeed;
-    public float JumpForce = 5f;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
+    private float wallJump;
+    private float wjDirection = 0;
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) PlayerSpeed = -Velocity;
+        var hDirection = 0f;
+        var vDirection = 0f;
+        var isOnGround = CheckGround();
+        
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            if (isOnGround) 
+            {
+                vDirection += jumpforce;
+            }
+            else
+            {
+                if (CheckWallR())
+                {
+                    vDirection += jumpforce;
+                    wjDirection = -1;
+                    wallJump = 10f;
+                }
+                if (CheckWallL()) 
+                {
+                    vDirection += jumpforce;
+                    wjDirection = 1;
+                    wallJump = 10f;
+                }
+            }
+        }
+        
 
-        else if (Input.GetKey(KeyCode.RightArrow)) PlayerSpeed = Velocity;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            hDirection += 1;
+        }
 
-        else PlayerSpeed = 0;
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            hDirection += -1;
+        }
 
-        rigidbody2D.linearVelocity = new Vector2 (PlayerSpeed, rigidbody2D.linearVelocityY);
+        wallJump = Mathf.Clamp(wallJump-Time.deltaTime*10, 0, 10f);
 
-
-        if (Input.GetKey(KeyCode.UpArrow)) PlayerSpeed = -Velocity;
-
-
+        rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
     }
+
+    public bool CheckGround()
+    {
+        var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 0.6f, mask);
+        if (rayCastHit)
+        {
+            wallJump = 0f;
+            return true;
+        }
+        return false;
+    }
+    public bool CheckWallR()
+    {
+        var rayCastHitWallright = Physics2D.Raycast(transform.position, new Vector2(1,0), 0.6f, mask);
+        if (rayCastHitWallright)
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool CheckWallL()
+    {
+        var rayCastHitWallright = Physics2D.Raycast(transform.position, new Vector2(-1,0), 0.6f, mask);
+        if (rayCastHitWallright)
+        {
+            return true;
+        }
+        return false;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.purple;
+        Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
+        Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
+        Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
+    }
+
 }
