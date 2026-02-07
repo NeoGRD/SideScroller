@@ -2,21 +2,36 @@ using UnityEngine;
 
 public class PlayerMovementPlatformer : MonoBehaviour
 {
+    /////////////////////////////////////////////////////////////
+
     public Rigidbody2D rb; //Ne pas oublier d'activer la gravity scale du rigidbody et d'ajouter un collider
     public float speed = 1;
     public float jumpforce = 1;
     public LayerMask mask; //Quels layer seront affecté par le raycast attention a ne pas ajouter le layer de votre perso sinon le raycast va trouver le perso avant de trouver le sol
-
+    
+    /////////////////////////////////////////////////////////////
+    
     private float wallJump;
     private float wjDirection = 0;
+    public bool DoubleJump;
+
+    /////////////////////////////////////////////////////////////
+
+    public bool test;
+
     void Update()
     {
         var hDirection = 0f;
         var vDirection = 0f;
         var isOnGround = CheckGround();
         
+
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
+            if (test)
+            {
+                rb.linearVelocityX = 0;
+            }
             if (isOnGround) 
             {
                 vDirection += jumpforce;
@@ -29,12 +44,18 @@ public class PlayerMovementPlatformer : MonoBehaviour
                     wjDirection = -1;
                     wallJump = 10f;
                 }
-                if (CheckWallL()) 
+                else if (CheckWallL()) 
                 {
                     vDirection += jumpforce;
                     wjDirection = 1;
                     wallJump = 10f;
                 }
+
+                else if (DoubleJump == true)
+                {
+                    vDirection += jumpforce;
+                    DoubleJump = false;
+                }  
             }
         }
         
@@ -60,15 +81,17 @@ public class PlayerMovementPlatformer : MonoBehaviour
         if (rayCastHit)
         {
             wallJump = 0f;
+            DoubleJump = true;
             return true;
         }
         return false;
     }
     public bool CheckWallR()
     {
-        var rayCastHitWallright = Physics2D.Raycast(transform.position, new Vector2(1,0), 0.6f, mask);
+        var rayCastHitWallright = Physics2D.Raycast(transform.position, new Vector2(1, 0), 0.6f, mask);
         if (rayCastHitWallright)
         {
+            DoubleJump = true;
             return true;
         }
         return false;
@@ -78,16 +101,17 @@ public class PlayerMovementPlatformer : MonoBehaviour
         var rayCastHitWallright = Physics2D.Raycast(transform.position, new Vector2(-1,0), 0.6f, mask);
         if (rayCastHitWallright)
         {
+            DoubleJump = true;
             return true;
         }
         return false;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.purple;
-        Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
-        Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
-        Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.purple;
+    //    Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
+    //    Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
+    //    Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
+    //}
 
 }
