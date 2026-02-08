@@ -5,6 +5,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 {
     /////////////////////////////////////////////////////////////
 
+    public SpriteRenderer sr;
     public Rigidbody2D rb; //Ne pas oublier d'activer la gravity scale du rigidbody et d'ajouter un collider
     public float speed = 1;
     public float jumpforce = 1;
@@ -21,12 +22,22 @@ public class PlayerMovementPlatformer : MonoBehaviour
     void Update()
     {
         /////////////////////////////////////////////////////////////
+        
+        if (rb.linearVelocityX > 0)
+        {
+             sr.flipX = true;
+        }
+        else if (rb.linearVelocityX < 0)
+        {
+            sr.flipX = false;
+        }
 
-        var hDirection = 0f;
+            /////////////////////////////////////////////////////////////
+
+            var hDirection = 0f;
         var vDirection = 0f;
         var isOnGround = CheckGround();
         
-
         /////////////////////////////////////////////////////////////
 
         if (Input.GetKeyDown(KeyCode.Space)) 
@@ -57,7 +68,6 @@ public class PlayerMovementPlatformer : MonoBehaviour
                 }  
             }
         }
-        
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
