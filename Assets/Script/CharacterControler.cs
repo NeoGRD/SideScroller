@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovementPlatformer : MonoBehaviour
@@ -16,22 +17,20 @@ public class PlayerMovementPlatformer : MonoBehaviour
     public bool DoubleJump;
 
     /////////////////////////////////////////////////////////////
-
-    public bool test;
-
+    
     void Update()
     {
+        /////////////////////////////////////////////////////////////
+
         var hDirection = 0f;
         var vDirection = 0f;
         var isOnGround = CheckGround();
         
 
+        /////////////////////////////////////////////////////////////
+
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            if (test)
-            {
-                rb.linearVelocityX = 0;
-            }
             if (isOnGround) 
             {
                 vDirection += jumpforce;
@@ -77,7 +76,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
     public bool CheckGround()
     {
-        var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 0.6f, mask);
+        var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 1f, mask);
         if (rayCastHit)
         {
             wallJump = 0f;
@@ -105,13 +104,14 @@ public class PlayerMovementPlatformer : MonoBehaviour
             return true;
         }
         return false;
+
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.purple;
-    //    Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
-    //    Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
-    //    Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
-    //}
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.purple;
+        Gizmos.DrawRay(transform.position, Vector3.down * 1f);
+        Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
+        Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
+    }
 
 }

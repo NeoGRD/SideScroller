@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\CharacterControler.cs" />
+    <Compile Include="Assets\Script\vector2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
