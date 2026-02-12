@@ -61,7 +61,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\CharacterControler.cs" />
+    <Compile Include="Assets\Script\vector2.cs" />
+    <Compile Include="Assets\Script\EnergyDisplay.cs" />
+    <Compile Include="Assets\Script\EnergyManager.cs" />
+    <Compile Include="Assets\Script\PlayerMovementPlatformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -910,6 +913,10 @@
       <Project>{825F7619-72EF-36B9-79B5-CFBEB5E3DA1F}</Project>
       <Name>Unity.VisualScripting.Core.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Cinemachine.Player.csproj">
+      <Project>{B0E36173-D925-D549-FF2B-D04BAB26649C}</Project>
+      <Name>Unity.Cinemachine.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
       <Project>{9E86BE36-70AD-45F4-B99A-6F8DA23818F2}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
@@ -989,6 +996,10 @@
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{355868CB-38B8-A6D8-BBF4-18F185E217E6}</Project>
       <Name>Unity.InputSystem.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Splines.Player.csproj">
+      <Project>{8FDAB4AF-7CF7-82EF-259F-D113A4F010FF}</Project>
+      <Name>Unity.Splines.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,11 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovementPlatformer : MonoBehaviour
 {
+    /////////////////////////////////////////////////////////////
+
+    public Animator anim;
+
     /////////////////////////////////////////////////////////////
 
     public SpriteRenderer sr;
@@ -10,19 +13,22 @@ public class PlayerMovementPlatformer : MonoBehaviour
     public float speed = 1;
     public float jumpforce = 1;
     public LayerMask mask; //Quels layer seront affecté par le raycast attention a ne pas ajouter le layer de votre perso sinon le raycast va trouver le perso avant de trouver le sol
-    
+
     /////////////////////////////////////////////////////////////
-    
+
     private float wallJump;
     private float wjDirection = 0;
     public bool DoubleJump;
 
     /////////////////////////////////////////////////////////////
+
+    public bool isOnGround;
+
+    /////////////////////////////////////////////////////////////
     
     void Update()
     {
-        /////////////////////////////////////////////////////////////
-        
+
         if (rb.linearVelocityX > 0)
         {
              sr.flipX = true;
@@ -34,9 +40,13 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
             /////////////////////////////////////////////////////////////
 
-            var hDirection = 0f;
+        var hDirection = 0f;
         var vDirection = 0f;
-        var isOnGround = CheckGround();
+        isOnGround = CheckGround();
+        
+        /////////////////////////////////////////////////////////////
+        
+        
         
         /////////////////////////////////////////////////////////////
 
@@ -63,6 +73,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
                 else if (DoubleJump == true)
                 {
+                    rb.linearVelocityY = 0;
                     vDirection += jumpforce;
                     DoubleJump = false;
                 }  
@@ -77,11 +88,22 @@ public class PlayerMovementPlatformer : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             hDirection += -1;
-        }
+        }   
 
-        wallJump = Mathf.Clamp(wallJump-Time.deltaTime*10, 0, 10f);
+            wallJump = Mathf.Clamp(wallJump - Time.deltaTime * 10, 0, 10f);
 
         rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
+        
+        if(rb.linearVelocityX != 0) 
+        {
+            anim.Play("run");
+        }
+
+        else if (rb.linearVelocityX == 0)
+        {
+            anim.Play("Idle");
+        }
+
     }
 
     public bool CheckGround()
