@@ -93,13 +93,31 @@ public class PlayerMovementPlatformer : MonoBehaviour
             wallJump = Mathf.Clamp(wallJump - Time.deltaTime * 10, 0, 10f);
 
         rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
-        
-        if(rb.linearVelocityX != 0) 
+
+        /////////////////////////////////////////////////////////////
+
+        if (rb.linearVelocityX != 0 && isOnGround) 
         {
             anim.Play("run");
         }
 
-        else if (rb.linearVelocityX == 0)
+        else if (rb.linearVelocityX <= 0.5 && isOnGround)
+        {
+            anim.Play("Idle");
+        }
+
+        else if (!isOnGround && CheckWallL() == true && CheckWallR() != true)
+        {
+            anim.Play("wallHug");
+        }
+
+        else if (!isOnGround && CheckWallR() == true && CheckWallL() != true)
+        {
+            sr.flipX = true;
+            anim.Play("wallHugleft");
+        }
+        
+        else
         {
             anim.Play("Idle");
         }

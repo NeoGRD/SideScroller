@@ -3,9 +3,12 @@ using UnityEngine.UI;
 
 public class EnergyDisplay : MonoBehaviour
 {
+    public Canvas canvas;
     public EnergyManager em;
     public Image ei;
     private float maxEnergy;
+
+    public float displayCD = 2;
 
     void Start()
     {
@@ -17,5 +20,6 @@ public class EnergyDisplay : MonoBehaviour
     void Update()
     {
         ei.fillAmount = em.Energy / maxEnergy;
+
     }
 }
