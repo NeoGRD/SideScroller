@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class EnergyDisplay : MonoBehaviour
 {
-    public Canvas canvas;
     public EnergyManager em;
+    public Canvas cV;
     public Image ei;
     private float maxEnergy;
 
-    public float displayCD = 2;
+    public float dCD;
 
     void Start()
     {
@@ -20,6 +20,21 @@ public class EnergyDisplay : MonoBehaviour
     void Update()
     {
         ei.fillAmount = em.Energy / maxEnergy;
+
+        if (em.Energy != maxEnergy)
+        {
+            dCD = 1f;
+        }
+
+        dCD -= Time.deltaTime;
+
+        if (dCD > 0f)
+        {
+            cV.enabled = true;
+        }
+        else { cV.enabled = false; }
+
+        if (dCD < 0f) { dCD = 0f; }
 
     }
 }

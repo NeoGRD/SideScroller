@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovementPlatformer : MonoBehaviour
@@ -23,6 +25,8 @@ public class PlayerMovementPlatformer : MonoBehaviour
     /////////////////////////////////////////////////////////////
 
     public bool isOnGround;
+    public float coyoteTimeCD;
+    public bool coyoteTime;
 
     /////////////////////////////////////////////////////////////
     
@@ -33,26 +37,44 @@ public class PlayerMovementPlatformer : MonoBehaviour
         {
              sr.flipX = true;
         }
-        else if (rb.linearVelocityX < 0)
+        else if (rb.linearVelocityX < 0 || !isOnGround && CheckWallL())
         {
             sr.flipX = false;
         }
 
-            /////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////
 
         var hDirection = 0f;
         var vDirection = 0f;
         isOnGround = CheckGround();
-        
-        /////////////////////////////////////////////////////////////
-        
-        
-        
+
         /////////////////////////////////////////////////////////////
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (coyoteTimeCD > 0 && coyoteTimeCD < 0.5f)
+        { 
+            coyoteTime = true; 
+        }
+        else coyoteTime = false;
+
+        coyoteTimeCD -= Time.deltaTime * 2.5f;
+
+        /////////////////////////////////////////////////////////////
+
+            if (coyoteTimeCD < 0)
         {
-            if (isOnGround) 
+            coyoteTimeCD = 0;
+        }
+
+            if (coyoteTimeCD > 0.65f)
+        {
+            coyoteTimeCD = 0.65f;
+        }
+
+        /////////////////////////////////////////////////////////////
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isOnGround)
             {
                 vDirection += jumpforce;
             }
@@ -64,7 +86,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
                     wjDirection = -1;
                     wallJump = 10f;
                 }
-                else if (CheckWallL()) 
+                else if (CheckWallL())
                 {
                     vDirection += jumpforce;
                     wjDirection = 1;
@@ -73,19 +95,34 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
                 else if (DoubleJump == true)
                 {
+                    if (coyoteTime == true)
+                    {
+                        coyoteTimeCD = 0f;
+                        DoubleJump = true;
+                    }
+                    else DoubleJump = false;
+
                     rb.linearVelocityY = 0;
                     vDirection += jumpforce;
-                    DoubleJump = false;
-                }  
+                }
+                
+                if (coyoteTime == true)
+                {
+                    coyoteTimeCD = 0;
+                }
+
             }
+            
+            coyoteTimeCD = 0;
+
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             hDirection += 1;
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             hDirection += -1;
         }   
@@ -96,7 +133,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         /////////////////////////////////////////////////////////////
 
-        if (rb.linearVelocityX != 0 && isOnGround) 
+        if (rb.linearVelocityX != 0 && isOnGround && CheckWallL() == false && CheckWallR() == false) 
         {
             anim.Play("run");
         }
@@ -106,17 +143,27 @@ public class PlayerMovementPlatformer : MonoBehaviour
             anim.Play("Idle");
         }
 
-        else if (!isOnGround && CheckWallL() == true && CheckWallR() != true)
+        else if (!isOnGround && CheckWallL() == true && CheckWallR() == false)
         {
             anim.Play("wallHug");
         }
 
-        else if (!isOnGround && CheckWallR() == true && CheckWallL() != true)
+        else if (!isOnGround && CheckWallR() == true && CheckWallL() == false)
         {
             sr.flipX = true;
             anim.Play("wallHugleft");
         }
-        
+
+        else if (rb.linearVelocityY > 0 && !isOnGround)
+        {
+            anim.Play("jump");
+        }
+
+        else if (rb.linearVelocityY < 0 && !isOnGround)
+        {
+            anim.Play("fall");
+        }
+
         else
         {
             anim.Play("Idle");
@@ -131,6 +178,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
         {
             wallJump = 0f;
             DoubleJump = true;
+            coyoteTimeCD = 0.65f;
             return true;
         }
         return false;
