@@ -1,5 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovementPlatformer : MonoBehaviour
@@ -24,18 +25,24 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
     /////////////////////////////////////////////////////////////
 
+    public EnergyManager em;
     public bool isOnGround;
     public float coyoteTimeCD;
     public bool coyoteTime;
 
     /////////////////////////////////////////////////////////////
-    
+
+    private void Start()
+    {
+        em = FindFirstObjectByType<EnergyManager>();
+    }
+
     void Update()
     {
 
         if (rb.linearVelocityX > 0)
         {
-             sr.flipX = true;
+            sr.flipX = true;
         }
         else if (rb.linearVelocityX < 0 || !isOnGround && CheckWallL())
         {
@@ -51,8 +58,8 @@ public class PlayerMovementPlatformer : MonoBehaviour
         /////////////////////////////////////////////////////////////
 
         if (coyoteTimeCD > 0 && coyoteTimeCD < 0.5f)
-        { 
-            coyoteTime = true; 
+        {
+            coyoteTime = true;
         }
         else coyoteTime = false;
 
@@ -60,12 +67,12 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         /////////////////////////////////////////////////////////////
 
-            if (coyoteTimeCD < 0)
+        if (coyoteTimeCD < 0)
         {
             coyoteTimeCD = 0;
         }
 
-            if (coyoteTimeCD > 0.65f)
+        if (coyoteTimeCD > 0.65f)
         {
             coyoteTimeCD = 0.65f;
         }
@@ -105,14 +112,14 @@ public class PlayerMovementPlatformer : MonoBehaviour
                     rb.linearVelocityY = 0;
                     vDirection += jumpforce;
                 }
-                
+
                 if (coyoteTime == true)
                 {
                     coyoteTimeCD = 0;
                 }
 
             }
-            
+
             coyoteTimeCD = 0;
 
         }
@@ -125,11 +132,19 @@ public class PlayerMovementPlatformer : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             hDirection += -1;
-        }   
+        }
 
-            wallJump = Mathf.Clamp(wallJump - Time.deltaTime * 10, 0, 10f);
+        wallJump = Mathf.Clamp(wallJump - Time.deltaTime * 10, 0, 10f);
 
-        rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
+        if (em.isLevi == true)
+        {
+            rb.linearVelocity = Vector2.Lerp(Vector2.zero, Vector2.zero, 3.0f * Time.deltaTime);
+        }
+
+        else if (em.isLevi == false)
+        {
+            rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
+        }
 
         /////////////////////////////////////////////////////////////
 
@@ -207,7 +222,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.purple;
-        Gizmos.DrawRay(transform.position, Vector3.down * 1f);
+        Gizmos.DrawRay(transform.position, Vector3.down * 1.15f);
         Gizmos.DrawRay(transform.position, Vector3.left * 0.6f);
         Gizmos.DrawRay(transform.position, Vector3.right * 0.6f);
     }
