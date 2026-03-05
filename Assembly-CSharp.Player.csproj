@@ -61,6 +61,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\ObjectPull.cs" />
     <Compile Include="Assets\Script\vector2.cs" />
     <Compile Include="Assets\Script\EnergyDisplay.cs" />
     <Compile Include="Assets\Script\EnergyManager.cs" />

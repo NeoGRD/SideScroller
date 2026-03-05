@@ -32,6 +32,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
     /////////////////////////////////////////////////////////////
 
+
     private void Start()
     {
         em = FindFirstObjectByType<EnergyManager>();
@@ -138,7 +139,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         if (em.isLevi == true)
         {
-            rb.linearVelocity = Vector2.Lerp(Vector2.zero, Vector2.zero, 3.0f * Time.deltaTime);
+            rb.linearVelocity = Vector2.Lerp(Vector2.zero, Vector2.zero, 0f );
         }
 
         else if (em.isLevi == false)
@@ -188,7 +189,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
     public bool CheckGround()
     {
-        var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 1f, mask);
+        var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 1.15f, mask);
         if (rayCastHit)
         {
             wallJump = 0f;
