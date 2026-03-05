@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnergyManager : MonoBehaviour
 {
-
+    
     public PlayerMovementPlatformer cc;
     public float Energy = 3f;
 
@@ -19,7 +19,7 @@ public class EnergyManager : MonoBehaviour
         {
             isLevi = false;
         }
-        
+
         else if (Input.GetKey(KeyCode.LeftShift) && !cc.isOnGround)
         {
             Energy -= Time.deltaTime;// * 45;
@@ -27,7 +27,6 @@ public class EnergyManager : MonoBehaviour
             {
                 isLevi = true;
             }
-
         }
 
         if (cc.isOnGround)
