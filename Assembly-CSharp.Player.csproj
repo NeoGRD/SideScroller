@@ -61,9 +61,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Telekinesis.cs" />
+    <Compile Include="Assets\Script\HurtController.cs" />
     <Compile Include="Assets\Script\ObjectPull.cs" />
+    <Compile Include="Assets\Script\HealthManager.cs" />
+    <Compile Include="Assets\Script\VelocityTracker.cs" />
     <Compile Include="Assets\Script\vector2.cs" />
     <Compile Include="Assets\Script\EnergyDisplay.cs" />
+    <Compile Include="Assets\Script\checkPoint.cs" />
     <Compile Include="Assets\Script\EnergyManager.cs" />
     <Compile Include="Assets\Script\PlayerMovementPlatformer.cs" />
   </ItemGroup>

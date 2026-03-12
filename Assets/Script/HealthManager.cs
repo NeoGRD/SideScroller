@@ -61,7 +61,6 @@ public class HealthManager : MonoBehaviour
     private IEnumerator DeathTransition()
     {
         cam.FollowOffset.z = 0;
-        yield return new WaitForSeconds(0.5f);
         transform.position = cp.position;
         yield return new WaitForSeconds(0.5f);
         cam.FollowOffset.z = -10;
