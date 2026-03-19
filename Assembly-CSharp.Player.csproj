@@ -65,8 +65,8 @@
     <Compile Include="Assets\Script\HurtController.cs" />
     <Compile Include="Assets\Script\ObjectPull.cs" />
     <Compile Include="Assets\Script\HealthManager.cs" />
-    <Compile Include="Assets\Script\VelocityTracker.cs" />
     <Compile Include="Assets\Script\vector2.cs" />
+    <Compile Include="Assets\Script\EnemyHealth.cs" />
     <Compile Include="Assets\Script\EnergyDisplay.cs" />
     <Compile Include="Assets\Script\checkPoint.cs" />
     <Compile Include="Assets\Script\EnergyManager.cs" />

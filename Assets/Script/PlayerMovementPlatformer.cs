@@ -43,7 +43,7 @@ public class PlayerMovementPlatformer : MonoBehaviour
     void Update()
     {
 
-        if (rb.linearVelocityX > 0)
+        if (rb.linearVelocityX > 0 && !CheckWallL())
         {
             sr.flipX = true;
         }
@@ -94,13 +94,13 @@ public class PlayerMovementPlatformer : MonoBehaviour
                 {
                     vDirection += jumpforce;
                     wjDirection = -1;
-                    wallJump = 10f;
+                    wallJump = 20f;
                 }
                 else if (CheckWallL())
                 {
                     vDirection += jumpforce;
                     wjDirection = 1;
-                    wallJump = 10f;
+                    wallJump = 20f;
                 }
 
                 else if (DoubleJump == true)

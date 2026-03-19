@@ -12,6 +12,9 @@ public class ObjectPull : MonoBehaviour
 
     public int objectWeight;
 
+    public bool canBreak;
+    public float magnitude = 10;
+
     void Start()
     {
         myTransform = GetComponent<Transform>();
@@ -23,7 +26,20 @@ public class ObjectPull : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     
+
+    }
+
+    public bool CanHurt()
+    {
+        if (rb.linearVelocity.magnitude >= magnitude)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnMouseDown()
