@@ -18,6 +18,10 @@ public class HurtController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        hm.AddHp(-damage);
+        var hm = collision.gameObject.GetComponent<HealthManager>();
+        if (hm != null)
+        {
+            hm.AddHp(-9000);
+        }
     }
 }

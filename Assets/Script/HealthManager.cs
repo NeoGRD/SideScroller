@@ -52,14 +52,12 @@ public class HealthManager : MonoBehaviour
             hp = hpMax;
             anim.Play("TransitionEnter");
             StartCoroutine(DeathTransition());
-            
-            
-
         }
     }
 
     private IEnumerator DeathTransition()
     {
+        print("");
         cam.FollowOffset.z = 0;
         transform.position = cp.position;
         yield return new WaitForSeconds(0.5f);
