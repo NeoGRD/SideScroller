@@ -6,7 +6,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public PlayerMovementPlatformer player;
     public Transform tf;
-    public int bulletSpeed = 1;
+    public float bulletLifetime;
+    public float bulletSpeed;
+    public float rotationSpeed;
+    public float shootSpeed;
+
 
     void Start()
     {
@@ -16,6 +20,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
-        tf.Rotate(0,0, -1);
+        tf.Rotate(0,0, rotationSpeed);
     }
 }

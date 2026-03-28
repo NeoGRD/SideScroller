@@ -8,12 +8,12 @@ public class Shooter : MonoBehaviour
 
     public int enemyType;
     public bool maaikeInRange;
-    public float bulletSpeed = 5f;
-
+    public EnemyBehaviour eb;
     public BulletBehaviour Bullet;
 
     void Start()
     {
+        //eb = FindFirstObjectByType<EnemyBehaviour>();
         StartCoroutine(shoot());
     }
 
@@ -29,9 +29,9 @@ public class Shooter : MonoBehaviour
             var newbullet = Instantiate(Bullet);
             newbullet.transform.position = transform.position; 
             newbullet.transform.rotation = transform.rotation;
-            newbullet.bulletSpeed = bulletSpeed;
+            newbullet.bulletSpeed = eb.bulletSpeed;
             newbullet.Launch();
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(eb.shootSpeed);
         }
     }
 

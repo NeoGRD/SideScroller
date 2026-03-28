@@ -57,7 +57,7 @@ public class HealthManager : MonoBehaviour
 
     private IEnumerator DeathTransition()
     {
-        print("");
+        print("adada");
         cam.FollowOffset.z = 0;
         transform.position = cp.position;
         yield return new WaitForSeconds(0.5f);

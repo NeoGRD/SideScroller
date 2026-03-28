@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class HurtController : MonoBehaviour
 {
@@ -21,7 +22,13 @@ public class HurtController : MonoBehaviour
         var hm = collision.gameObject.GetComponent<HealthManager>();
         if (hm != null)
         {
-            hm.AddHp(-9000);
+            hm.AddHp(-damage);
         }
+        if (collision.gameObject.GetComponent<EnemyHealth>() || collision.gameObject.GetComponent<BulletBehaviour>())
+        {
+            return;
+        }
+        else Destroy(gameObject);
+        
     }
 }
