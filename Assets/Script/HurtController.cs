@@ -28,7 +28,7 @@ public class HurtController : MonoBehaviour
         {
             return;
         }
-        else Destroy(gameObject);
+        //else Destroy(gameObject);
         
     }
 }

@@ -150,43 +150,9 @@ public class PlayerMovementPlatformer : MonoBehaviour
             rb.linearVelocity = new Vector2(hDirection * speed+wallJump*wjDirection, rb.linearVelocityY+vDirection); //On set up la velocité horizontal 
         }
 
+        anim.SetFloat("speed",Mathf.Abs(rb.linearVelocityX));
+        anim.SetFloat("YVelo",rb.linearVelocityY);
         /////////////////////////////////////////////////////////////
-
-        if (rb.linearVelocityX != 0 && isOnGround && CheckWallL() == false && CheckWallR() == false) 
-        {
-            anim.Play("run");
-        }
-
-        else if (rb.linearVelocityX <= 0.5 && isOnGround)
-        {
-            anim.Play("Idle");
-        }
-
-        else if (!isOnGround && CheckWallL() == true && CheckWallR() == false)
-        {
-            anim.Play("wallHug");
-        }
-
-        else if (!isOnGround && CheckWallR() == true && CheckWallL() == false)
-        {
-            sr.flipX = true;
-            anim.Play("wallHugleft");
-        }
-
-        else if (rb.linearVelocityY > 0 && !isOnGround)
-        {
-            anim.Play("jump");
-        }
-
-        else if (rb.linearVelocityY < 0 && !isOnGround)
-        {
-            anim.Play("fall");
-        }
-
-        else
-        {
-            anim.Play("Idle");
-        }
 
     }
 
@@ -195,8 +161,8 @@ public class PlayerMovementPlatformer : MonoBehaviour
         var rayCastHit = Physics2D.Raycast(transform.position, new Vector2(0, -1), 1.15f, mask);
         if (rayCastHit)
         {
-            wallJump = 0f;
             DoubleJump = true;
+            wallJump = 0f;
             coyoteTimeCD = 0.65f;
             return true;
         }

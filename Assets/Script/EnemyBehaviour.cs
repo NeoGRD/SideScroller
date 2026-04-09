@@ -13,26 +13,19 @@ public class EnemyBehaviour : MonoBehaviour
     public float shootSpeed;
     //public bool canAim = false;
     //public Transform targetTf;
-    // private bool isAiming;
+    private bool isAiming;
 
 
     void Start()
     {
         player      = FindFirstObjectByType<PlayerMovementPlatformer>();
-        targetTf    = FindFirstObjectByType<PlayerMovementPlatformer>().transform;
+        //targetTf    = FindFirstObjectByType<PlayerMovementPlatformer>().transform;
         tf          = GetComponent<Transform>();
     }
 
     void Update()
     {
-        //if (isAiming)
-        //{
-        //    tf.Rotate(0,0, rotationSpeed);
-        //}
-        //else
-        //{
-        //   transform.LookAt(targetTf);
-        //}
+        tf.Rotate(0,0, rotationSpeed);
     }
 
     //private void OnCollisionStay2D(Collision2D collision)
