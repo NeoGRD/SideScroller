@@ -8,6 +8,8 @@ public class PlayerMovementPlatformer : MonoBehaviour
     /////////////////////////////////////////////////////////////
 
     public Animator anim;
+    public Transform maaTransform;
+    public bool flipX;
 
     /////////////////////////////////////////////////////////////
 
@@ -46,11 +48,21 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         if (rb.linearVelocityX > 0 && !CheckWallL())
         {
-            sr.flipX = true;
+            flipX = true;
         }
         else if (rb.linearVelocityX < 0 || !isOnGround && CheckWallL())
         {
-            sr.flipX = false;
+            flipX = false;
+        }
+
+        if (flipX)
+        {
+            maaTransform.localScale = new Vector3(x: (float)0.04220727, maaTransform.localScale.y, maaTransform.localScale.z);
+        }
+        else 
+        {
+            maaTransform.localScale = new Vector3(x: (float)-0.04220727, maaTransform.localScale.y, maaTransform.localScale.z);
+
         }
 
         /////////////////////////////////////////////////////////////
