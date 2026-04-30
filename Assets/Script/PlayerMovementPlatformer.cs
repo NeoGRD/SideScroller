@@ -46,11 +46,11 @@ public class PlayerMovementPlatformer : MonoBehaviour
     void Update()
     {
 
-        if (rb.linearVelocityX > 0 && !CheckWallL())
+        if (rb.linearVelocityX > 2 && !CheckWallR() || CheckWallL() && !isOnGround)
         {
             flipX = true;
         }
-        else if (rb.linearVelocityX < 0 || !isOnGround && CheckWallL())
+        else if (rb.linearVelocityX < -2 && !CheckWallL() || CheckWallR() && !isOnGround)
         {
             flipX = false;
         }
@@ -97,9 +97,12 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
+
             if (isOnGround)
             {
                 vDirection += jumpforce;
+                anim.SetTrigger("JumpTrigger");
             }
             else
             {
@@ -125,8 +128,10 @@ public class PlayerMovementPlatformer : MonoBehaviour
                     }
                     else DoubleJump = false;
 
+                    anim.SetTrigger("JumpTrigger");
                     rb.linearVelocityY = 0;
                     vDirection += jumpforce;
+
                 }
 
                 if (coyoteTime == true)
@@ -164,6 +169,10 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
         anim.SetFloat("speed",Mathf.Abs(rb.linearVelocityX));
         anim.SetFloat("YVelo",rb.linearVelocityY);
+        anim.SetBool("isGrounded",isOnGround);
+        anim.SetBool("Floating", em.isLevi);
+        anim.SetBool("WallRight",CheckWallR());
+        anim.SetBool("WallLeft", CheckWallL());
         /////////////////////////////////////////////////////////////
 
     }

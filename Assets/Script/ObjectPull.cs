@@ -15,6 +15,9 @@ public class ObjectPull : MonoBehaviour
     public bool canBreak;
     public float magnitude = 10;
 
+    public bool outline = false;
+    public GameObject OutlineObj;
+
     void Start()
     {
         myTransform = GetComponent<Transform>();
@@ -26,8 +29,11 @@ public class ObjectPull : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-
+        if (!outline)
+        {
+            OutlineObj.SetActive(false);
+        }
+        else OutlineObj.SetActive(true);
     }
 
     public bool CanHurt()
@@ -45,6 +51,15 @@ public class ObjectPull : MonoBehaviour
     private void OnMouseDown()
     {
         rb.linearVelocity = (myTransform.position - Maaike.transform.position).normalized * tk.throwForce / objectWeight;
+    }
+
+    private void OnMouseOver()
+    {
+        outline = true;
+    }
+    private void OnMouseExit()
+    {
+        outline = false;
     }
 
 }
