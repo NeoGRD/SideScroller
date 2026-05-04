@@ -38,6 +38,10 @@ public class PlayerMovementPlatformer : MonoBehaviour
 
     /////////////////////////////////////////////////////////////
 
+    public float UpSpeed;
+
+    /////////////////////////////////////////////////////////////
+
     private void Start()
     {
         em = FindFirstObjectByType<EnergyManager>();
@@ -111,12 +115,14 @@ public class PlayerMovementPlatformer : MonoBehaviour
                     vDirection += jumpforce;
                     wjDirection = -1;
                     wallJump = 20f;
+                    anim.SetTrigger("JumpTrigger");
                 }
                 else if (CheckWallL())
                 {
                     vDirection += jumpforce;
                     wjDirection = 1;
                     wallJump = 20f;
+                    anim.SetTrigger("JumpTrigger");
                 }
 
                 else if (DoubleJump == true)
