@@ -28,9 +28,6 @@ public class EnemyBehaviour : MonoBehaviour
         tf.Rotate(0,0, rotationSpeed);
     }
 
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    isAiming = true;
-    //}
+  
 
 }

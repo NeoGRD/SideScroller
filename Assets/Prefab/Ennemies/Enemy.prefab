@@ -359,6 +359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   op: {fileID: 0}
+  debris: {fileID: 3751287889000311066, guid: df6a5fc6aac8c6c4aa82d8805fc92bcf, type: 3}
+  SpawnDebris: 2
   hp: 1
   hpMax: 1
 --- !u!114 &8244835885227829807
@@ -375,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 0}
   tf: {fileID: 0}
+  bulletLifetime: 0
   bulletSpeed: 5
   rotationSpeed: -1
   shootSpeed: 0.5

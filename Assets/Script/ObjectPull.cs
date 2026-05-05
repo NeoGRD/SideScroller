@@ -13,7 +13,7 @@ public class ObjectPull : MonoBehaviour
     public int objectWeight;
 
     public bool canBreak;
-    public float magnitude = 10;
+    public float magnitude = 5;
 
     public bool outline = false;
     public GameObject OutlineObj;

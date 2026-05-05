@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 5200752722801485991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.019997, y: 5.5379, z: 0}
-  m_LocalScale: {x: 1.3147357, y: 2.192003, z: 0.98232}
+  m_LocalPosition: {x: -26.019997, y: 5.5403, z: 0}
+  m_LocalScale: {x: 0.51386, y: 0.51386, z: 0.51386}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 652590150594146272}
@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.1570644, g: 0.14391243, b: 0.20754719, a: 1}
+  m_Sprite: {fileID: 6184848020208029251, guid: b4d0da30395a8e44ea453eb3d802b757, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,13 +160,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 4.02, y: 3.19}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.2197125, y: 3.0403304}
   m_EdgeRadius: 0
 --- !u!114 &7627800240419470473
 MonoBehaviour:
@@ -224,7 +224,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.040194195}
-  m_Size: {x: 2.062575, y: 1.8421537}
+  m_Size: {x: 5.8168287, y: 5.8168287}
   m_Direction: 0
 --- !u!1 &8309592828796362444
 GameObject:
@@ -253,7 +253,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.004947, z: 0}
-  m_LocalScale: {x: 1.1157308, y: 1.0769317, z: 1.3663124}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8289833623780639640}
@@ -305,7 +305,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -842482194592243943, guid: 1b79e812893016a4689c51124f346978, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
