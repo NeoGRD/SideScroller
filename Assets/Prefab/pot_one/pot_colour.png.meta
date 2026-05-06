@@ -103,12 +103,12 @@ TextureImporter:
       name: pot_colour_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 4
-        width: 402
-        height: 319
+        x: 0
+        y: 0
+        width: 417
+        height: 329
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -117,15 +117,55 @@ TextureImporter:
       bones: []
       spriteID: 34e0742718ef4d550800000000000000
       internalID: 6184848020208029251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+      vertices:
+      - {x: 417, y: 0}
+      - {x: 417, y: 329}
+      - {x: 0, y: 329}
+      - {x: 0, y: 0}
+      indices: 000000000200000001000000000000000300000002000000
+      edges:
+      - {x: 0, y: 1}
+      - {x: 0, y: 3}
+      - {x: 1, y: 2}
+      - {x: 2, y: 3}
+      weights:
+      - 'weight[0]': 0
+        'weight[1]': 0
+        'weight[2]': 0
+        'weight[3]': 0
+        'boneIndex[0]': 0
+        'boneIndex[1]': 0
+        'boneIndex[2]': 0
+        'boneIndex[3]': 0
+      - 'weight[0]': 0
+        'weight[1]': 0
+        'weight[2]': 0
+        'weight[3]': 0
+        'boneIndex[0]': 0
+        'boneIndex[1]': 0
+        'boneIndex[2]': 0
+        'boneIndex[3]': 0
+      - 'weight[0]': 0
+        'weight[1]': 0
+        'weight[2]': 0
+        'weight[3]': 0
+        'boneIndex[0]': 0
+        'boneIndex[1]': 0
+        'boneIndex[2]': 0
+        'boneIndex[3]': 0
+      - 'weight[0]': 0
+        'weight[1]': 0
+        'weight[2]': 0
+        'weight[3]': 0
+        'boneIndex[0]': 0
+        'boneIndex[1]': 0
+        'boneIndex[2]': 0
+        'boneIndex[3]': 0
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3e6d0d93b799a5a4a8bb9621b39ff070
     internalID: 0
     vertices: []
     indices: 
