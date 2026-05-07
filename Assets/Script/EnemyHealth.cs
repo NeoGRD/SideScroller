@@ -48,11 +48,11 @@ public class EnemyHealth : MonoBehaviour
             if (attackObject.CanHurt())
             {
                 int debrisAmount = Random.Range(0, SpawnDebris + 1);
-                float SPY = Random.Range(-0.5f, 0.5f);
-                float SpPX = Random.Range(-0.5f, 0.5f);
+                float SPX = Random.Range(-0.5f, 0.5f);
+                var posx = gameObject.transform.position.x;
                 for (int i = 0; i < debrisAmount; i++)
                 {
-                    Instantiate(debris,gameObject.transform.position,gameObject.transform.rotation);
+                    Instantiate(debris,new Vector3(posx += SPX, gameObject.transform.position.y, 0),gameObject.transform.rotation);
                 }
                 Destroy(attackObject.gameObject);
                 Destroy(gameObject);
