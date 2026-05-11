@@ -4,19 +4,34 @@ using UnityEngine.TextCore.Text;
 
 public class ObjectPull : MonoBehaviour
 {
+    //////////////////////////////////////////
+
     public Transform myTransform;
     public Rigidbody2D rb;
+    
+    //////////////////////////////////////////
 
     public Telekinesis tk;
     public PlayerMovementPlatformer Maaike;
+    
+    //////////////////////////////////////////
 
     public int objectWeight;
+    
+    //////////////////////////////////////////
 
     public bool canBreak;
     public float magnitude = 3;
 
+    public bool Anchored;
+
+    //////////////////////////////////////////
+
     public bool outline = false;
     public GameObject OutlineObj;
+
+    //////////////////////////////////////////
+
 
     void Start()
     {
@@ -24,6 +39,12 @@ public class ObjectPull : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Maaike = FindFirstObjectByType<PlayerMovementPlatformer>();
         tk = FindFirstObjectByType<Telekinesis>();
+
+        if(Anchored)
+        {
+            rb.gravityScale = 0;
+        }
+
     }
 
     // Update is called once per frame
@@ -34,6 +55,9 @@ public class ObjectPull : MonoBehaviour
             OutlineObj.SetActive(false);
         }
         else OutlineObj.SetActive(true);
+        
+
+
     }
 
     public bool CanHurt()
@@ -51,6 +75,7 @@ public class ObjectPull : MonoBehaviour
     private void OnMouseDown()
     {
         rb.linearVelocity = (myTransform.position - Maaike.transform.position).normalized * tk.throwForce / objectWeight;
+        Anchored = true;
     }
 
     private void OnMouseOver()
