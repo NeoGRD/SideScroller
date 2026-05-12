@@ -6,20 +6,24 @@ public class StartMenuController : MonoBehaviour
 
     public Scene sceneTr;
 
+    public GameObject optionMenu;
+
 
     public void OnStartClick()
     {
         SceneManager.LoadScene("SampleScene");
-        print("auzhuzrgzva");
     }
 
 
 
 
     public void OnOptionsClick()
+    {  
+        gameObject.SetActive(true);
+    }
+    public void OnOptionsExitClick()
     {
-        print("bizou");
-
+        gameObject.SetActive(false);
     }
 
 
