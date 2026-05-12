@@ -75,6 +75,7 @@
     <Compile Include="Assets\Script\EnemyBehaviour.cs" />
     <Compile Include="Assets\Script\DoorBehaviour.cs" />
     <Compile Include="Assets\Script\test.cs" />
+    <Compile Include="Assets\Script\TransitionScript.cs" />
     <Compile Include="Assets\Script\EnergyManager.cs" />
     <Compile Include="Assets\Script\PlayerMovementPlatformer.cs" />
   </ItemGroup>
