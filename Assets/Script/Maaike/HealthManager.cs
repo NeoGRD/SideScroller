@@ -9,6 +9,9 @@ public class HealthManager : MonoBehaviour
 
     public Animator anim;
     public CinemachineFollow cam;
+    public TransitionScript tr;
+
+    public PlayerMovementPlatformer pmp;
 
     public Transform maaike;
     public Transform cp;
@@ -22,7 +25,9 @@ public class HealthManager : MonoBehaviour
 
     void Start()
     {
+        pmp = FindFirstObjectByType<PlayerMovementPlatformer>();
         maaike = FindFirstObjectByType<PlayerMovementPlatformer>().transform;
+        tr = FindFirstObjectByType<TransitionScript>();
         cam = FindFirstObjectByType<CinemachineFollow>();
         ChangeHP(hpMax);
     }
@@ -31,6 +36,7 @@ public class HealthManager : MonoBehaviour
         hp = newAmount;
         if (hp <= 0)
         {
+            pmp.enabled = false;
             Die();
         }
     }
@@ -49,20 +55,23 @@ public class HealthManager : MonoBehaviour
     {
         if (cp != null)
         {
-            hp = hpMax;
-            anim.Play("TransitionEnter");
+            
             StartCoroutine(DeathTransition());
         }
     }
 
     private IEnumerator DeathTransition()
     {
+        StartCoroutine(tr.TransitionEnterTimer());
+        yield return new WaitForSeconds(1.7f);
         print("adada");
         cam.FollowOffset.z = 0;
         transform.position = cp.position;
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         cam.FollowOffset.z = -10;
-        anim.Play("TransitionExit");
+        hp = hpMax;
+        pmp.enabled=true;
+        StartCoroutine(tr.TransitionExitTimer());
     }
 
 

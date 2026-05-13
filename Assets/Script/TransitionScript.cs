@@ -2,13 +2,14 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class TransitionScript : MonoBehaviour
 {
     /////////////////////////////////////////////////
     
     public Material tr;
-    
+    private Material img;
     
     public float transitionSpeed;
     public float transitionTime;
@@ -19,9 +20,9 @@ public class TransitionScript : MonoBehaviour
     
     void Start()
     {
-        Renderer rend = GetComponent<Renderer>();   
-
-        rend.material =  new Material(tr);
+        img = GetComponent<Graphic>().material;
+        Debug.Log(img);
+        //img =  new Material(tr);
 
 
     }
@@ -31,26 +32,28 @@ public class TransitionScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            //img.SetFloat("_Completion", 5f);
             TransitionEnter();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            //img.SetFloat("_Completion", 0f);
             TransitionExit();
         }
     }
-    public IEnumerator TransitionTimer()
+    public IEnumerator TransitionEnterTimer()
     {
         float elapsedTime = 0;
-        tr.SetFloat("Completion", 0);
+        float current = 0;
+        float max = 2;
+        float min = 0;
+        img.SetFloat("_Completion", 0);
         while (elapsedTime < transitionTime)
         {
-            float max = 2;
-            float min = 0.05f;
-            float current = 0;
 
             current += Time.deltaTime * transitionSpeed;
             elapsedTime += Time.deltaTime;
-            tr.SetFloat("Completion",current);
+            img.SetFloat("_Completion",current);
             if (current > max)
             {
                 current = max;
@@ -62,17 +65,42 @@ public class TransitionScript : MonoBehaviour
                 yield return null;
         }
     }
+    public IEnumerator TransitionExitTimer()
+    {
+        float elapsedTime = 0;
+        float current = 2;
+        float max = 2;
+        float min = 0;
+        img.SetFloat("_Completion", 0);
+        while (elapsedTime < transitionTime)
+        {
+
+            current -= Time.deltaTime * transitionSpeed;
+            elapsedTime += Time.deltaTime;
+            img.SetFloat("_Completion", current);
+            if (current > max)
+            {
+                current = max;
+            }
+            if (current < min)
+            {
+                current = min;
+            }
+            yield return null;
+        }
+    }
+
 
     public void TransitionEnter()
     {
-        tr.SetInt("State", 0);
-        StartCoroutine(TransitionTimer());
+        img.SetInt("_State", 1);
+        StartCoroutine(TransitionEnterTimer());
         return;
     }
     public void TransitionExit()
     {
-        tr.SetInt("State", 1);
-        StartCoroutine(TransitionTimer());
+        img.SetInt("_State", 0);
+        StartCoroutine(TransitionExitTimer());
         return;
     }
 
