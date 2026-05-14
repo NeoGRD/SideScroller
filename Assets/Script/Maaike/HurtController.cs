@@ -24,7 +24,7 @@ public class HurtController : MonoBehaviour
         {
             hm.AddHp(-damage);
         }
-        if (collision.gameObject.GetComponent<EnemyHealth>() || collision.gameObject.GetComponent<BulletBehaviour>())
+        if (collision.gameObject.GetComponent<EnemyHealth>() || collision.gameObject.GetComponent<BulletBehaviour>() || collision.gameObject.GetComponent<ObjectPull>())
         {
             return;
         }
