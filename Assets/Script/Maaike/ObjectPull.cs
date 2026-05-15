@@ -8,6 +8,9 @@ public class ObjectPull : MonoBehaviour
 
     public Transform myTransform;
     public Rigidbody2D rb;
+
+    public float TempX;
+    public float TempY;
     
     //////////////////////////////////////////
 
@@ -21,7 +24,9 @@ public class ObjectPull : MonoBehaviour
     //////////////////////////////////////////
 
     public bool canBreak;
-    public float magnitude = 3;
+    public float magnitude = 1;
+
+    public float currentmagnitude;
 
     public bool Anchored;
 
@@ -40,6 +45,9 @@ public class ObjectPull : MonoBehaviour
         Maaike = FindFirstObjectByType<PlayerMovementPlatformer>();
         tk = FindFirstObjectByType<Telekinesis>();
 
+        TempX = myTransform.position.x;
+        TempY = myTransform.position.y;
+
         if(Anchored)
         {
             rb.gravityScale = 0;
@@ -50,6 +58,8 @@ public class ObjectPull : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentmagnitude = rb.linearVelocity.magnitude;
+
         if (!outline)
         {
             OutlineObj.SetActive(false);
@@ -59,6 +69,12 @@ public class ObjectPull : MonoBehaviour
 
 
     }
+
+    public void Reset()
+    {
+        transform.position = new Vector3 (TempX, TempY, 0f);
+    }
+
 
     public bool CanHurt()
     {

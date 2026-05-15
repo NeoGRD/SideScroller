@@ -7,9 +7,15 @@ public class HealthManager : MonoBehaviour
 
     /////////////////////////////////////////////////
 
+    public ObjectPull[] objects;
+
+    /////////////////////////////////////////////////
+
     public Animator anim;
     public CinemachineFollow cam;
     public TransitionScript tr;
+    
+    /////////////////////////////////////////////////
 
     public PlayerMovementPlatformer pmp;
 
@@ -30,6 +36,9 @@ public class HealthManager : MonoBehaviour
         tr = FindFirstObjectByType<TransitionScript>();
         cam = FindFirstObjectByType<CinemachineFollow>();
         ChangeHP(hpMax);
+
+        objects = FindObjectsByType<ObjectPull>(FindObjectsSortMode.None);
+
     }
     public void ChangeHP(int newAmount)
     {
@@ -55,7 +64,10 @@ public class HealthManager : MonoBehaviour
     {
         if (cp != null)
         {
-            
+            foreach (ObjectPull obj in objects)
+            { 
+                obj.Reset();
+            }
             StartCoroutine(DeathTransition());
         }
     }

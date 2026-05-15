@@ -54,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
                 {
                     Instantiate(debris,new Vector3(posx += SPX, gameObject.transform.position.y, 0),gameObject.transform.rotation);
                 }
-                Destroy(attackObject.gameObject);
+                attackObject.gameObject.SetActive(false);
                 Destroy(gameObject);
 
             }

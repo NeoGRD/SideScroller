@@ -69,6 +69,10 @@ PrefabInstance:
       value: -0.040194195
       objectReference: {fileID: 0}
     - target: {fileID: 7627800240419470473, guid: 0b99d0ea70d8c2044a5c5561df5f2649, type: 3}
+      propertyPath: magnitude
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627800240419470473, guid: 0b99d0ea70d8c2044a5c5561df5f2649, type: 3}
       propertyPath: OutlineObj
       value: 
       objectReference: {fileID: 521582786114054510}

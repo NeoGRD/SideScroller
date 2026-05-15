@@ -19,6 +19,7 @@ public class BulletBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+            Debug.Log("collision détécégha");
         if (collision.gameObject.GetComponent<EnemyHealth>() || collision.gameObject.GetComponent<BulletBehaviour>())
         {
             return;
