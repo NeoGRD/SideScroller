@@ -15,12 +15,12 @@ public class EnergyManager : MonoBehaviour
     void Update()
     {
         
-        if (Energy == 0 || cc.isOnGround || !Input.GetKey(KeyCode.LeftShift))
+        if (Energy == 0 || cc.isOnGround || !Input.GetMouseButton(1))
         {
             isLevi = false;
         }
 
-        else if (Input.GetKey(KeyCode.LeftShift) && !cc.isOnGround)
+        else if (Input.GetMouseButton(1) && !cc.isOnGround)
         {
             Energy -= Time.deltaTime;// * 45;
             if (Energy > 0 && Energy <= 3f)

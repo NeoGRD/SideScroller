@@ -90,8 +90,12 @@ public class ObjectPull : MonoBehaviour
 
     private void OnMouseDown()
     {
-        rb.linearVelocity = (myTransform.position - Maaike.transform.position).normalized * tk.throwForce / objectWeight;
-        Anchored = true;
+        if (Anchored)
+        {
+            rb.gravityScale = 1;
+            Anchored = false;
+        }
+        else rb.linearVelocity = (myTransform.position - Maaike.transform.position).normalized * tk.throwForce / objectWeight;
     }
 
     private void OnMouseOver()

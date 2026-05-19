@@ -30,16 +30,7 @@ public class TransitionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //img.SetFloat("_Completion", 5f);
-            TransitionEnter();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //img.SetFloat("_Completion", 0f);
-            TransitionExit();
-        }
+
     }
     public IEnumerator TransitionEnterTimer()
     {
