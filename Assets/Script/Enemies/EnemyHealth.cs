@@ -6,9 +6,13 @@ public class EnemyHealth : MonoBehaviour
 
     /////////////////////////////////////////////////
 
-    public ObjectPull op;
+    public DoorOpening door;
+
+    /////////////////////////////////////////////////
+
     public GameObject debris;
     public int SpawnDebris = 2;
+    public int debrisMin = 0;
 
     /////////////////////////////////////////////////
 
@@ -20,6 +24,10 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         ChangeHP(hpMax);
+        if(door != null)
+        {
+            door.Add(this);
+        }
     }
     public void ChangeHP(int newAmount)
     {
@@ -47,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
         {
             if (attackObject.CanHurt())
             {
-                int debrisAmount = Random.Range(0, SpawnDebris + 1);
+                int debrisAmount = Random.Range(debrisMin, SpawnDebris + 1);
                 float SPX = Random.Range(-0.5f, 0.5f);
                 var posx = gameObject.transform.position.x;
                 for (int i = 0; i < debrisAmount; i++)
@@ -55,6 +63,7 @@ public class EnemyHealth : MonoBehaviour
                     Instantiate(debris,new Vector3(posx += SPX, gameObject.transform.position.y, 0),gameObject.transform.rotation);
                 }
                 attackObject.gameObject.SetActive(false);
+                door.TryOpen(this);
                 Destroy(gameObject);
 
             }

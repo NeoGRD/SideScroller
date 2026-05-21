@@ -360,9 +360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba261403ca37d3f46852ed45d850273c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  op: {fileID: 0}
   debris: {fileID: 3362472876876180081, guid: 980f30fde175b564599e46e6a4a02b68, type: 3}
   SpawnDebris: 2
+  debrisMin: 0
   hp: 1
   hpMax: 1
 --- !u!114 &8244835885227829807

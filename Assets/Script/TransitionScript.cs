@@ -21,10 +21,7 @@ public class TransitionScript : MonoBehaviour
     void Start()
     {
         img = GetComponent<Graphic>().material;
-        Debug.Log(img);
-        //img =  new Material(tr);
-
-
+        img.SetFloat("_Completion", 0);
     }
 
     // Update is called once per frame
